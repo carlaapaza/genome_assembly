@@ -1,8 +1,7 @@
 # Short-read bacterial assembly
 
-A transparent Bash reimplementation of the major stages in the CGPS/GHRU
-SPAdes assembly workflow, adapted for paired-end Illumina bacterial data and a
-macOS Apple Silicon host.
+A Bash reimplementation of the major stages in the CGPS/GHRU SPAdes assembly workflow, 
+adapted for paired-end Illumina bacterial data and a macOS Apple Silicon host.
 
 The repository preserves the original workflow logic while keeping each stage
 independently runnable and inspectable.
