@@ -1,30 +1,25 @@
-# Reproducible short-read bacterial assembly (Bash)
+# Short-read bacterial assembly
 
 A transparent Bash reimplementation of the major stages in the CGPS/GHRU
 SPAdes assembly workflow, adapted for paired-end Illumina bacterial data and a
-macOS Apple Silicon host. It does **not** use Nextflow.
+macOS Apple Silicon host.
 
 The repository preserves the original workflow logic while keeping each stage
-independently runnable and inspectable. It is suitable for GitHub: input data,
-databases, work files and results are ignored.
+independently runnable and inspectable.
 
 ## Workflow
 
-| Stage | Program | Main output |
-|---|---|---|
-| 01 | FastQC + MultiQC | raw-read QC |
-| 02 | optional Cutadapt + Trimmomatic | trimmed paired reads |
-| 03 | FastQC + MultiQC | post-trimming QC |
-| 04 | KAT + Mash + Lighter | genome-size estimate and corrected reads |
-| 05 | ConFindr | inter/intraspecies contamination |
-| 06 | seqtk | depth estimate and deterministic downsampling |
-| 07 | FLASH | merged and unmerged paired reads |
-| 08 | SPAdes | assembly |
-| 09 | Python filter | sequences >=500 bp and >=3x |
-| 10 | BactInspector | species screening |
-| 11 | QUAST | per-sample and combined assembly QC |
-| 12 | MultiQC | consolidated report |
-| 13 | QualiFyr | optional legacy QC classification |
+1. FastQC + MultiQC
+2. Cutadapt + Trimmomatic (Optional)
+3. FastQC + MultiQC
+4. KAT + Mash + Lighter 
+5. ConFindr
+6. seqtk
+7. FLASH
+8. SPAdes
+9. Python filter for sequences >=500 bp and >=3x
+10. BactInspector for species screening
+11. QUAST + MultiQC
 
 ## Quick start on macOS Apple Silicon
 
@@ -110,4 +105,4 @@ Workflow design adapted from the
 [CGPS/GHRU SPAdes Assembly workflow](https://gitlab.com/cgps/ghru/pipelines/dsl2/pipelines/assembly),
 version 2.1.3 (source commit `ad87f10e79fe6c6c2f0033d15b849393a3bc9061`),
 which was itself based on Shovill. This repository is an
-independent Bash organization of the workflow and does not include Nextflow.
+independent Bash organization of the workflow.
