@@ -1,0 +1,26 @@
+quast:
+  '# contigs (>= 0 bp)':
+    failure: {condition_type: gt, condition_value: 500}
+  '# contigs (>= 1000 bp)':
+    warning: {condition_type: gt, condition_value: 150}
+    failure: {condition_type: gt, condition_value: 300}
+  'N50':
+    warning: {condition_type: lt, condition_value: 50000}
+    failure: {condition_type: lt, condition_value: 25000}
+  'Total length (>= 1000 bp)':
+    warning: {condition_type: lt_or_gt, condition_value: [1450000, 2100000]}
+  'GC (%)':
+    warning: {condition_type: lt_or_gt, condition_value: [35, 43]}
+  "# N's per 100 kbp":
+    warning: {condition_type: gt, condition_value: 100}
+confindr:
+  contam_status:
+    failure: {condition_type: eq, condition_value: 'True'}
+  percentage_contamination:
+    warning: {condition_type: gt, condition_value: 0}
+    failure: {condition_type: gt, condition_value: 5}
+bactinspector:
+  result:
+    warning: {condition_type: eq, condition_value: uncertain}
+  species:
+    warning: {condition_type: eq, condition_value: ''}

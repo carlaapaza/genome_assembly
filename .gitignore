@@ -1,0 +1,8 @@
+results/
+data/raw/*
+!data/raw/.gitkeep
+databases/
+work/
+*.log
+.DS_Store
+

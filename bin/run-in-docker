@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root="$(cd "$(dirname "$0")/.." && pwd)"
+image="registry.gitlab.com/cgps/ghru/pipelines/dsl2/pipelines/assembly:latest"
+docker run --rm --platform linux/amd64 \
+    -u "$(id -u):$(id -g)" \
+    -v "${root}:/pipeline" \
+    -w /pipeline \
+    "$image" "$@"
+
