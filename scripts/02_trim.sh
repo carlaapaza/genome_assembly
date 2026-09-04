@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 source "$(cd "$(dirname "$0")/.." && pwd)/lib/common.sh"
-require_cmd trimmomatic; assert_inputs
+require_cmd trimmomatic; require_cmd python; assert_inputs
 [[ "$RUN_CUTADAPT" == "false" ]] || require_cmd cutadapt
 
 out="${OUTPUT_DIR}/02_trimmed_reads"
@@ -12,7 +12,24 @@ while IFS= read -r -d '' r1; do
     t1="${out}/${sample}_1.trimmed.fastq.gz"; t2="${out}/${sample}_2.trimmed.fastq.gz"
     [[ -s "$t1" && -s "$t2" ]] && { msg "Trimming already complete: $sample"; continue; }
 
-    mean_length="$(gzip -cd "$r1" | awk 'NR%4==2{s+=length($0);n++} n==100000{exit} END{if(n)printf "%.0f",s/n}')"
+    mean_length="$(python - "$r1" <<'PY'
+import gzip
+import sys
+
+total = 0
+count = 0
+with gzip.open(sys.argv[1], "rt") as handle:
+    for line_number, line in enumerate(handle):
+        if line_number % 4 == 1:
+            total += len(line.rstrip("\r\n"))
+            count += 1
+            if count == 100_000:
+                break
+if count == 0:
+    raise SystemExit("FASTQ contains no reads")
+print(round(total / count))
+PY
+)"
     min_length="$(( mean_length * 30 / 100 ))"
     (( min_length < 1 )) && min_length=1
     msg "Trimming $sample (mean read=${mean_length} bp; MINLEN=${min_length})"
@@ -30,4 +47,3 @@ while IFS= read -r -d '' r1; do
         "$in1" "$in2" "$t1" /dev/null "$t2" /dev/null \
         "ILLUMINACLIP:${ADAPTER_FILE}:2:30:10" SLIDINGWINDOW:4:20 LEADING:25 TRAILING:25 "MINLEN:${min_length}"
 done < <(list_r1_files)
-
