@@ -1,9 +1,8 @@
-<<<<<<< Updated upstream
 # Short-read bacterial assembly
 
 A Bash reimplementation of the major stages in the CGPS/GHRU SPAdes assembly workflow, 
 adapted for paired-end Illumina bacterial data and a macOS Apple Silicon host.
-=======
+
 # Short-read bacterial assembly (Bash)
 
 A transparent Bash reimplementation of the major stages in the CGPS/GHRU
@@ -12,7 +11,6 @@ macOS Apple Silicon host.
 
 The repository preserves the original workflow logic while keeping each stage
 independently runnable and inspectable.
->>>>>>> Stashed changes
 
 ## Workflow
 
@@ -24,14 +22,11 @@ independently runnable and inspectable.
 6. seqtk
 7. FLASH
 8. SPAdes
-<<<<<<< Updated upstream
 9. BactInspector for species screening
 10. QUAST + MultiQC
-=======
 9. Python filter for sequences >=500 bp and >=3x
 10. BactInspector for species screening
 11. QUAST + MultiQC
->>>>>>> Stashed changes
 
 ## Quick start on macOS Apple Silicon
 
