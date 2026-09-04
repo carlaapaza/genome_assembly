@@ -3,15 +3,6 @@
 A Bash reimplementation of the major stages in the CGPS/GHRU SPAdes assembly workflow, 
 adapted for paired-end Illumina bacterial data and a macOS Apple Silicon host.
 
-# Short-read bacterial assembly (Bash)
-
-A transparent Bash reimplementation of the major stages in the CGPS/GHRU
-SPAdes assembly workflow, adapted for paired-end Illumina bacterial data and a
-macOS Apple Silicon host.
-
-The repository preserves the original workflow logic while keeping each stage
-independently runnable and inspectable.
-
 ## Workflow
 
 1. FastQC + MultiQC
@@ -24,10 +15,7 @@ independently runnable and inspectable.
 8. SPAdes
 9. BactInspector for species screening
 10. QUAST + MultiQC
-9. Python filter for sequences >=500 bp and >=3x
-10. BactInspector for species screening
-11. QUAST + MultiQC
-
+    
 ## Quick start on macOS Apple Silicon
 
 Docker Desktop is recommended because Lighter, FLASH, ConFindr, BactInspector
